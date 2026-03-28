@@ -1,0 +1,13 @@
+services:
+  sql-imdb:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: mssql_equipo_imdb
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Caballo123#
+      - MSSQL_PID=Developer
+    ports:
+      - "1434:1433"
+    volumes:
+      - ./data:/var/opt/mssql/data
+      - ./backups:/var/opt/mssql/backups
