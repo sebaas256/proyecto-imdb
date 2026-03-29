@@ -2,28 +2,34 @@ Proyecto IMDb - Configuración del Entorno de Datos
 
 Este repositorio contiene la configuración necesaria para levantar una instancia de SQL Server 2022 mediante Docker, específicamente diseñada para el análisis de la base de datos de IMDb.
 
+---
 Requisitos Previos
 
     Docker & Docker Compose instalados.
 
     Archivo de backup IMDb_Source_v2.bak (Solicitar enlace de descarga al equipo).
+---
 
 Instrucciones de Configuración
 1. Preparación de Carpetas
 
 Clona este repositorio y asegúrate de tener la siguiente estructura de carpetas:
 
+```
 proyecto_imdb/
 ├── backups/           # <-- Coloca aquí el archivo .bak
 ├── data/              # <-- Se llenará automáticamente (Ignorado por Git)
 └── docker-compose.yml
+```
 
 2. Permisos (Solo para usuarios de Linux)
 
 Si estás en Ubuntu/Linux, ejecuta los siguientes comandos para que Docker tenga permisos de escritura en la carpeta de datos:
 
+```
 sudo chown -R 10001:0 data/
 sudo chmod -R 770 data/
+```
 
 (En Windows no es necesario realizar este paso).
 
@@ -31,9 +37,11 @@ sudo chmod -R 770 data/
 
 Desde la terminal, dentro de la carpeta del proyecto, ejecuta:
 
+```
 docker-compose up -d
+```
 
-Conexión a la Base de Datos
+-Conexión a la Base de Datos
 
 Utiliza Azure Data Studio o VS Code (SQL Server Extension) con los siguientes datos:
 
@@ -49,6 +57,7 @@ Restauración de los Datos (IMDb)
 
 Una vez conectado al servidor, abre una nueva consulta (Query) y ejecuta el siguiente script para cargar los 12 millones de registros:
 
+```
 USE [master];
 GO
 
@@ -65,6 +74,7 @@ WITH
     REPLACE, 
     STATS = 5;
 GO
+```
 
 Notas Importantes
 
